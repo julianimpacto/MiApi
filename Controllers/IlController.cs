@@ -3,18 +3,18 @@ using Microsoft.EntityFrameworkCore;
 
 [ApiController]
 [Route("api/[controller]")]
-public class UsController : ControllerBase
+public class IlController : ControllerBase
 {
     private readonly MyDbContext _context;
 
-    public UsController(MyDbContext context)
+    public IlController(MyDbContext context)
     {
         _context = context;
     }
 
     // GET api/us
     [HttpGet]
-    public IActionResult GetUs()
+    public IActionResult GetIl()
     {
         var il = _context.Us.ToList();
         return Ok(il);
@@ -22,7 +22,7 @@ public class UsController : ControllerBase
 
     // GET api/us/5
     [HttpGet("{id}")]
-    public IActionResult GetUs(int id)
+    public IActionResult GetIl(int id)
     {
         var il = _context.Us.Find(id);
         if (il == null) return NotFound();

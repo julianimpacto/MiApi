@@ -1,0 +1,13 @@
+# Archivos de Visual Studio
+.vs/
+*.vsidx
+
+# Binarios y compilados
+bin/
+obj/
+
+# Configuración de usuario
+*.user
+*.suo
+*.userosscache
+*.sln.docstates

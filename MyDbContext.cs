@@ -8,5 +8,7 @@ public class MyDbContext : DbContext {
 
     // Ejemplo: tabla de usuarios
     public DbSet<Us> Us { get; set; }
+
+    public DbSet<Us> Us { get; set; }
 }
 

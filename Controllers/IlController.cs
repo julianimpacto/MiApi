@@ -16,7 +16,7 @@ public class IlController : ControllerBase
     [HttpGet]
     public IActionResult GetIl()
     {
-        var il = _context.Us.ToList();
+        var il = _context.Il.ToList();
         return Ok(il);
     }
 

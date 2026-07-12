@@ -24,7 +24,7 @@ public class IlController : ControllerBase
     [HttpGet("{id}")]
     public IActionResult GetIl(int id)
     {
-        var il = _context.Us.Find(id);
+        var il = _context.Il.Find(id);
         if (il == null) return NotFound();
         return Ok(il);
     }

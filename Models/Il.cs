@@ -1,6 +1,5 @@
 public class Il
-{
-    Enter password:
+{    
     public int Id { get; set; }
     public string pr { get; set; }
     public string cldeli { get; set; }

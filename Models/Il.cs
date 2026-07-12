@@ -6,7 +6,7 @@ public class Il
     public string? ftp { get; set; } = string.Empty;
     public int? idcrac { get; set; } = 0;
     public int? idte { get; set; } = 0;
-    public DateOnly? vi { get; set; } = #01/01/2020#;
+    public DateOnly vi { get; set; }
     public string mo { get; set; }
     public string bada { get; set; }
     public string lo { get; set; }

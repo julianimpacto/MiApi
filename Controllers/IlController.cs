@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 [ApiController]
 [Route("api/[controller]")]
@@ -12,7 +12,7 @@ public class IlController : ControllerBase
         _context = context;
     }
 
-    // GET api/us
+    // GET api/il
     [HttpGet]
     public IActionResult GetIl()
     {
@@ -20,7 +20,7 @@ public class IlController : ControllerBase
         return Ok(il);
     }
 
-    // GET api/us/5
+    // GET api/il/5
     [HttpGet("{id}")]
     public IActionResult GetIl(int id)
     {

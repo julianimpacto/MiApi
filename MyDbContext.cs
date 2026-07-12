@@ -10,5 +10,6 @@ public class MyDbContext : DbContext {
     public DbSet<Us> Us { get; set; }
 
     public DbSet<Il> Il { get; set; }
+
 }
 

@@ -51,6 +51,12 @@ app.MapGet("/us", async (MyDbContext db) =>
     return await db.Us.ToListAsync();
 });
 
+app.MapGet("/il", async (MyDbContext db) =>
+{
+    return await db.Il.ToListAsync();
+});
+
+
 app.Run();
 
 record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)

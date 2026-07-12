@@ -63,3 +63,6 @@
 /home/julianazure/api-demo/MiApi/bin/Debug/net8.0/runtimes/win-x64/native/krb5_64.dll
 /home/julianazure/api-demo/MiApi/bin/Debug/net8.0/runtimes/win-x64/native/krbcc64.dll
 /home/julianazure/api-demo/MiApi/bin/Debug/net8.0/runtimes/win/lib/net8.0/System.Windows.Extensions.dll
+C:\Users\SACC\source\repos\julianimpacto\MiApi\obj\Debug\net8.0\MiApi.dll
+C:\Users\SACC\source\repos\julianimpacto\MiApi\obj\Debug\net8.0\refint\MiApi.dll
+C:\Users\SACC\source\repos\julianimpacto\MiApi\obj\Debug\net8.0\MiApi.pdb

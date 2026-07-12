@@ -1,32 +1,34 @@
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 
-[ApiController]
-[Route("[controller]")]
-
-public class UsController : ControllerBase
+namespace MiApi.Controllers
 {
-    private readonly MyDbContext _context;
-
-    public UsController(MyDbContext context)
+    [ApiController]
+    [Route("[controller]")] // 👈 ruta será /us
+    public class UsController : ControllerBase
     {
-        _context = context;
-    }
+        private readonly MyDbContext _context;
 
-    // GET api/us
-    [HttpGet]
-    public IActionResult GetUs()
-    {
-        var us = _context.Us.ToList();
-        return Ok(us);
-    }
+        public UsController(MyDbContext context)
+        {
+            _context = context;
+        }
 
-    // GET api/us/5
-    [HttpGet("{id}")]
-    public IActionResult GetUs(int id)
-    {
-        var us = _context.Us.Find(id);
-        if (us == null) return NotFound();
-        return Ok(us);
+        // GET /us
+        [HttpGet]
+        public IActionResult GetUs()
+        {
+            var us = _context.Us.ToList();
+            return Ok(us);
+        }
+
+        // GET /us/5
+        [HttpGet("{id}")]
+        public IActionResult GetUs(int id)
+        {
+            var us = _context.Us.Find(id);
+            if (us == null) return NotFound();
+            return Ok(us);
+        }
     }
 }

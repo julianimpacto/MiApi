@@ -4,7 +4,7 @@ using System.Linq;
 namespace MiApi.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("[controller]")] // 👈 ruta será /il
     public class IlController : ControllerBase
     {
         private readonly MyDbContext _context;
@@ -14,6 +14,7 @@ namespace MiApi.Controllers
             _context = context;
         }
 
+        // GET /il
         [HttpGet]
         public IActionResult GetIl()
         {
@@ -21,6 +22,7 @@ namespace MiApi.Controllers
             return Ok(il);
         }
 
+        // GET /il/5
         [HttpGet("{id}")]
         public IActionResult GetIl(int id)
         {

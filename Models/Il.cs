@@ -4,9 +4,9 @@ public class Il
     public string? pr { get; set; } = string.Empty;
     public string? cldeli { get; set; } = string.Empty;
     public string? ftp { get; set; } = string.Empty;
-    public int idcrac { get; set; }
-    public int idte { get; set; }
-    public DateOnly vi { get; set; }
+    public int? idcrac { get; set; } = 0;
+    public int? idte { get; set; } = 0;
+    public DateOnly? vi { get; set; } = #01/01/2020#;
     public string mo { get; set; }
     public string bada { get; set; }
     public string lo { get; set; }

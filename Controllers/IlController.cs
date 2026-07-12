@@ -1,32 +1,32 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 
-[ApiController]
-[Route("[controller]")]
-
-public class IlController : ControllerBase
+namespace MiApi.Controllers
 {
-    private readonly MyDbContext _context;
-
-    public IlController(MyDbContext context)
+    [ApiController]
+    [Route("[controller]")]
+    public class IlController : ControllerBase
     {
-        _context = context;
-    }
+        private readonly MyDbContext _context;
 
-    // GET api/il
-    [HttpGet]
-    public IActionResult GetIl()
-    {
-        var il = _context.Il.ToList();
-        return Ok(il);
-    }
+        public IlController(MyDbContext context)
+        {
+            _context = context;
+        }
 
-    // GET api/il/5
-    [HttpGet("{id}")]
-    public IActionResult GetIl(int id)
-    {
-        var il = _context.Il.Find(id);
-        if (il == null) return NotFound();
-        return Ok(il);
+        [HttpGet]
+        public IActionResult GetIl()
+        {
+            var il = _context.Il.ToList();
+            return Ok(il);
+        }
+
+        [HttpGet("{id}")]
+        public IActionResult GetIl(int id)
+        {
+            var il = _context.Il.Find(id);
+            if (il == null) return NotFound();
+            return Ok(il);
+        }
     }
 }

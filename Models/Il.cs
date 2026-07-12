@@ -1,9 +1,9 @@
 public class Il
 {    
     public int Id { get; set; }
-    public string pr { get; set; }
-    public string cldeli { get; set; }
-    public string ftp { get; set; }
+    public string? pr { get; set; } = string.Empty;
+    public string? cldeli { get; set; } = string.Empty;
+    public string? ftp { get; set; } = string.Empty;
     public int idcrac { get; set; }
     public int idte { get; set; }
     public DateOnly vi { get; set; }

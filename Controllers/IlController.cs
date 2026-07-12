@@ -2,7 +2,8 @@
 using System.Linq;
 
 [ApiController]
-[Route("api/[controller]")]
+[Route("[controller]")]
+
 public class IlController : ControllerBase
 {
     private readonly MyDbContext _context;

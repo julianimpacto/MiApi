@@ -2,7 +2,8 @@ using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 
 [ApiController]
-[Route("api/[controller]")]
+[Route("[controller]")]
+
 public class UsController : ControllerBase
 {
     private readonly MyDbContext _context;

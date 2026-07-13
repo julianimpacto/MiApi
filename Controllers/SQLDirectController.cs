@@ -10,7 +10,7 @@ public class SqlDirectController : ControllerBase
     public SqlDirectController(IConfiguration config)
     {
         // Lee la cadena de conexión desde appsettings.json
-        _connectionString = config.GetConnectionString("MiConexion");
+        _connectionString = config.GetConnectionString("DefaultConnection");
     }
 
     [HttpPost]

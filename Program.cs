@@ -15,6 +15,8 @@ builder.Services.AddDbContext<MyDbContext>(options =>
         new MySqlServerVersion(new Version(8, 0, 17)) // Ajusta según tu versión de MySQL
     ));
 
+builder.Services.AddSingleton<IConfiguration>(builder.Configuration);
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

@@ -54,5 +54,39 @@ namespace MiApi.Controllers
             if (!il.Any()) return NotFound();
             return Ok(il);
         }
+
+        // POST /il
+        [HttpPost]
+        public async Task<IActionResult> CreateIl([FromBody] Il nuevoIl)
+        {
+            _context.Il.Add(nuevoIl);
+            await _context.SaveChangesAsync();
+            return CreatedAtAction(nameof(GetIlById), new { id = nuevoIl.Id }, nuevoIl);
+        }
+
+        // GET /il/{id}
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetIlById(int id)
+        {
+            var il = await _context.Il.FindAsync(id);
+            if (il == null) return NotFound();
+            return Ok(il);
+        }
+
+        // PUT /il/{id}
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateIl(int id, [FromBody] Il ilActualizado)
+        {
+            var il = await _context.Il.FindAsync(id);
+            if (il == null) return NotFound();
+
+            // Actualiza los campos necesarios
+            il.Nombre = ilActualizado.Nombre;
+            il.Descripcion = ilActualizado.Descripcion;
+
+            await _context.SaveChangesAsync();
+            return Ok(il);
+        }
+
     }
 }

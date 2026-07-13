@@ -81,8 +81,9 @@ namespace MiApi.Controllers
             if (il == null) return NotFound();
 
             // Actualiza los campos necesarios
-            il.Nombre = ilActualizado.Nombre;
-            il.Descripcion = ilActualizado.Descripcion;
+            il.pr = ilActualizado.pr
+            il.cldeli = ilActualizado.cldeli;
+            il.vi = ilActualizado.vi;
 
             await _context.SaveChangesAsync();
             return Ok(il);

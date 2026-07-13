@@ -23,7 +23,7 @@ namespace MiApi.Controllers
         }
 
         // GET /il/5
-        [HttpGet("{id}")]
+        [HttpGet("{id:int}")]
         public IActionResult GetIlById(int id)
         {
             var il = _context.Il.Find(id);
@@ -31,12 +31,24 @@ namespace MiApi.Controllers
             return Ok(il);
         }
 
-        // GET /il/pr/Juan
-        [HttpGet("pr/{pr}")]
-        public IActionResult GetIlByPr(string pr)
+        // GET /il/pr/exacto/COOTRASAR
+        [HttpGet("pr/exacto/{pr}")]
+        public IActionResult GetIlByPrExact(string pr)
         {
             var il = _context.Il
                 .Where(i => i.pr == pr)
+                .ToList();
+
+            if (!il.Any()) return NotFound();
+            return Ok(il);
+        }
+
+        // GET /il/pr/like/coop
+        [HttpGet("pr/like/{texto}")]
+        public IActionResult GetIlByPrLike(string texto)
+        {
+            var il = _context.Il
+                .Where(i => i.pr.Contains(texto)) // 👈 LIKE '%texto%'
                 .ToList();
 
             if (!il.Any()) return NotFound();

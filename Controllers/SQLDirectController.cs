@@ -21,5 +21,6 @@ public class SqlDirectController : ControllerBase
         using var cmd = new MySqlCommand(query, conn);
         int filas = cmd.ExecuteNonQuery();
         return Ok(new { FilasAfectadas = filas });
+
     }
 }

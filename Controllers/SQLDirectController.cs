@@ -10,7 +10,7 @@ public class SqlDirectController : ControllerBase
     public SqlDirectController(IConfiguration config)
     {
         // Lee la cadena de conexión desde appsettings.json
-        _connectionString = config.GetConnectionString("DefaultConnection");
+        _connectionString = config.GetConnectionString("MiConexion");
     }
 
     [HttpPost]
@@ -21,6 +21,5 @@ public class SqlDirectController : ControllerBase
         using var cmd = new MySqlCommand(query, conn);
         int filas = cmd.ExecuteNonQuery();
         return Ok(new { FilasAfectadas = filas });
-
     }
 }

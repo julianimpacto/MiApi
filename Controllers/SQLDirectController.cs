@@ -22,4 +22,5 @@ public class SqlDirectController : ControllerBase
         int filas = cmd.ExecuteNonQuery();
         return Ok(new { FilasAfectadas = filas });
     }
+
 }

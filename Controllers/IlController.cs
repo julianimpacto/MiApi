@@ -89,5 +89,17 @@ namespace MiApi.Controllers
             return Ok(il);
         }
 
+        // DELETE /il/{id}
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteIl(int id)
+        {
+            var il = await _context.Il.FindAsync(id);
+            if (il == null) return NotFound();
+
+            _context.Il.Remove(il);
+            await _context.SaveChangesAsync();
+            return NoContent(); // 204 sin contenido
+        }
+
     }
 }

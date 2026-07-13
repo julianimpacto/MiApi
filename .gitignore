@@ -11,3 +11,10 @@ obj/
 *.suo
 *.userosscache
 *.sln.docstates
+
+# Archivos de compilación y temporales
+bin/
+obj/
+*.log
+*.cache
+*.tmp

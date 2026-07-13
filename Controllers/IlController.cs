@@ -30,5 +30,13 @@ namespace MiApi.Controllers
             if (il == null) return NotFound();
             return Ok(il);
         }
+
+        [HttpGet("{pr}")]
+        public IActionResult GetIl(string pr)
+        {
+            var il = _context.Il.Find(pr);
+            if (il == null) return NotFound();
+            return Ok(il);
+        }
     }
 }

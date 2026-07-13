@@ -24,18 +24,22 @@ namespace MiApi.Controllers
 
         // GET /il/5
         [HttpGet("{id}")]
-        public IActionResult GetIl(int id)
+        public IActionResult GetIlById(int id)
         {
             var il = _context.Il.Find(id);
             if (il == null) return NotFound();
             return Ok(il);
         }
 
-        [HttpGet("{pr}")]
+        // GET /il/pr/Juan
+        [HttpGet("pr/{pr}")]
         public IActionResult GetIlByPr(string pr)
         {
-            var il = _context.Il.Find(pr);
-            if (il == null) return NotFound();
+            var il = _context.Il
+                .Where(i => i.pr == pr)
+                .ToList();
+
+            if (!il.Any()) return NotFound();
             return Ok(il);
         }
     }

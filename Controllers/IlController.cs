@@ -81,7 +81,7 @@ namespace MiApi.Controllers
             if (il == null) return NotFound();
 
             // Actualiza los campos necesarios
-            il.pr = ilActualizado.pr
+            il.pr = ilActualizado.pr;
             il.cldeli = ilActualizado.cldeli;
             il.vi = ilActualizado.vi;
 

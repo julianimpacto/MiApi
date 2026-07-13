@@ -16,11 +16,19 @@ public class SqlDirectController : ControllerBase
     [HttpPost]
     public IActionResult Ejecutar([FromBody] string query)
     {
-        using var conn = new MySqlConnection(_connectionString);
-        conn.Open();
-        using var cmd = new MySqlCommand(query, conn);
-        int filas = cmd.ExecuteNonQuery();
-        return Ok(new { FilasAfectadas = filas });
+        try
+        {
+            using var conn = new MySqlConnection(_connectionString);
+            conn.Open();
+            using var cmd = new MySqlCommand(query, conn);
+            int filas = cmd.ExecuteNonQuery();
+            return Ok(new { FilasAfectadas = filas });
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, new { Error = ex.Message });
+        }
     }
+
 
 }

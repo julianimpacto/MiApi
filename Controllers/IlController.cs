@@ -74,20 +74,20 @@ namespace MiApi.Controllers
         }
 
         // PUT /il/{id}
-        [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateIl(int id, [FromBody] Il ilActualizado)
-        {
-            var il = await _context.Il.FindAsync(id);
-            if (il == null) return NotFound();
+        //[HttpPut("{id}")]
+        //public async Task<IActionResult> UpdateIl(int id, [FromBody] Il ilActualizado)
+        //{
+        //    var il = await _context.Il.FindAsync(id);
+        //    if (il == null) return NotFound();
 
-            // Actualiza los campos necesarios
-            il.pr = ilActualizado.pr
-            il.cldeli = ilActualizado.cldeli;
-            il.vi = ilActualizado.vi;
+        //    // Actualiza los campos necesarios
+        //    il.pr = ilActualizado.pr
+        //    il.cldeli = ilActualizado.cldeli;
+        //    il.vi = ilActualizado.vi;
 
-            await _context.SaveChangesAsync();
-            return Ok(il);
-        }
+        //    await _context.SaveChangesAsync();
+        //    return Ok(il);
+        //}
 
     }
 }

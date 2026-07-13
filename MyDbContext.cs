@@ -11,5 +11,7 @@ public class MyDbContext : DbContext {
 
     public DbSet<Il> Il { get; set; }
 
+    public DbSet<Coco> Il { get; set; }
+
 }
 

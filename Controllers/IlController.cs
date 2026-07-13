@@ -32,7 +32,7 @@ namespace MiApi.Controllers
         }
 
         [HttpGet("{pr}")]
-        public IActionResult GetIl(string pr)
+        public IActionResult GetIlByPr(string pr)
         {
             var il = _context.Il.Find(pr);
             if (il == null) return NotFound();

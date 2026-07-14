@@ -1,4 +1,9 @@
-﻿[ApiController]
+﻿
+using Microsoft.AspNetCore.Mvc;
+using MySql.Data.MySqlClient;
+using MiApi.Models; // <-- Importa la clase SqlRequest
+
+[ApiController]
 [Route("sql")]
 public class SqlDirectController : ControllerBase
 {

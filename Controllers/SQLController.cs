@@ -1,28 +1,36 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+using MySql.Data.MySqlClient;
+using MiApi.Models;
 
-[ApiController]
-[Route("sql")]
-public class SqlController : ControllerBase
+namespace MiApi.Controllers
 {
-    private readonly MyDbContext _context;
-
-    public SqlController(MyDbContext context)
+    [ApiController]
+    [Route("sql")]
+    public class SqlController : ControllerBase
     {
-        _context = context;
-    }
+        private readonly string _connectionString;
 
-    [HttpPost]
-    public async Task<IActionResult> Ejecutar([FromBody] string query)
-    {
-        try
+        public SqlController(IConfiguration config)
         {
-            var result = await _context.Database.ExecuteSqlRawAsync(query);
-            return Ok(new { FilasAfectadas = result });
+            _connectionString = config.GetConnectionString("DefaultConnection");
         }
-        catch (Exception ex)
+
+        [HttpPost]
+        public IActionResult Ejecutar([FromBody] SqlRequest request)
         {
-            return BadRequest(new { Error = ex.Message });
+            try
+            {
+                using var conn = new MySqlConnection(_connectionString);
+                conn.Open();
+                using var cmd = new MySqlCommand(request.Query, conn);
+                int filas = cmd.ExecuteNonQuery();
+
+                return Ok(new { FilasAfectadas = filas });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { Error = ex.Message });
+            }
         }
     }
 }

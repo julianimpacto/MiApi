@@ -19,6 +19,7 @@ namespace MiApi.Controllers
         [HttpPost]
         public IActionResult Create([FromBody] SqlRequest request)
         {
+
             try
             {
                 using var conn = new MySqlConnection(_connectionString);

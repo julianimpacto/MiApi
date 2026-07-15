@@ -5,7 +5,7 @@ using MiApi.Models;
 namespace MiApi.Controllers
 {
     [ApiController]
-    [Route("sql")]
+    [Route("api/[controller]")]
     public class SqlController : ControllerBase
     {
         private readonly string _connectionString;
@@ -15,8 +15,9 @@ namespace MiApi.Controllers
             _connectionString = config.GetConnectionString("DefaultConnection");
         }
 
+        // CREATE
         [HttpPost]
-        public IActionResult Ejecutar([FromBody] SqlRequest request)
+        public IActionResult Create([FromBody] SqlRequest request)
         {
             try
             {
@@ -24,7 +25,72 @@ namespace MiApi.Controllers
                 conn.Open();
                 using var cmd = new MySqlCommand(request.Query, conn);
                 int filas = cmd.ExecuteNonQuery();
+                return Ok(new { FilasAfectadas = filas });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { Error = ex.Message });
+            }
+        }
 
+        // READ
+        [HttpGet]
+        public IActionResult Read([FromQuery] string query)
+        {
+            try
+            {
+                using var conn = new MySqlConnection(_connectionString);
+                conn.Open();
+                using var cmd = new MySqlCommand(query, conn);
+                using var reader = cmd.ExecuteReader();
+
+                var resultados = new List<Dictionary<string, object>>();
+                while (reader.Read())
+                {
+                    var fila = new Dictionary<string, object>();
+                    for (int i = 0; i < reader.FieldCount; i++)
+                    {
+                        fila[reader.GetName(i)] = reader.GetValue(i);
+                    }
+                    resultados.Add(fila);
+                }
+
+                return Ok(resultados);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { Error = ex.Message });
+            }
+        }
+
+        // UPDATE
+        [HttpPut]
+        public IActionResult Update([FromBody] SqlRequest request)
+        {
+            try
+            {
+                using var conn = new MySqlConnection(_connectionString);
+                conn.Open();
+                using var cmd = new MySqlCommand(request.Query, conn);
+                int filas = cmd.ExecuteNonQuery();
+                return Ok(new { FilasAfectadas = filas });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { Error = ex.Message });
+            }
+        }
+
+        // DELETE
+        [HttpDelete]
+        public IActionResult Delete([FromBody] SqlRequest request)
+        {
+            try
+            {
+                using var conn = new MySqlConnection(_connectionString);
+                conn.Open();
+                using var cmd = new MySqlCommand(request.Query, conn);
+                int filas = cmd.ExecuteNonQuery();
                 return Ok(new { FilasAfectadas = filas });
             }
             catch (Exception ex)

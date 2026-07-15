@@ -17,10 +17,7 @@ namespace MiApi.Controllers
 
         // CREATE
         [HttpPost]
-        public IActionResult Create([FromBody] SqlRequest request)
-        {
-            return EjecutarNonQuery(request.Query);
-        }
+        public IActionResult Create([FromBody] SqlRequest request) => EjecutarNonQuery(request.Query);
 
         // READ
         [HttpGet]
@@ -41,7 +38,7 @@ namespace MiApi.Controllers
                     {
                         object valor = reader.GetValue(i);
 
-                        // 🔹 Normalización segura para Swagger
+                        // 🔹 Normalización segura
                         if (valor == DBNull.Value)
                             fila[reader.GetName(i)] = null;
                         else if (valor is int || valor is long || valor is short)
@@ -51,7 +48,7 @@ namespace MiApi.Controllers
                         else if (valor is bool b)
                             fila[reader.GetName(i)] = b;
                         else
-                            fila[reader.GetName(i)] = valor.ToString();
+                            fila[reader.GetName(i)] = valor.ToString(); // todo lo demás como string
                     }
                     resultados.Add(fila);
                 }
@@ -66,17 +63,11 @@ namespace MiApi.Controllers
 
         // UPDATE
         [HttpPut]
-        public IActionResult Update([FromBody] SqlRequest request)
-        {
-            return EjecutarNonQuery(request.Query);
-        }
+        public IActionResult Update([FromBody] SqlRequest request) => EjecutarNonQuery(request.Query);
 
         // DELETE
         [HttpDelete]
-        public IActionResult Delete([FromBody] SqlRequest request)
-        {
-            return EjecutarNonQuery(request.Query);
-        }
+        public IActionResult Delete([FromBody] SqlRequest request) => EjecutarNonQuery(request.Query);
 
         // 🔹 Método auxiliar para INSERT/UPDATE/DELETE
         private IActionResult EjecutarNonQuery(string query)

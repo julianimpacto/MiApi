@@ -35,13 +35,13 @@ namespace MiApi.Controllers
                 while (reader.Read())
                 {
                     var fila = new Dictionary<string, object>();
-                    for (int i = 0; i < reader.FieldCount; i++)
-                    {
-                        // 🔹 Forzar todo a string o null
+                    ffor(int i = 0; i < reader.FieldCount; i++)
+{
                         fila[reader.GetName(i)] = reader.IsDBNull(i)
                             ? null
-                            : Convert.ToString(reader.GetValue(i), CultureInfo.InvariantCulture);
+                            : Convert.ToString(reader.GetValue(i), System.Globalization.CultureInfo.InvariantCulture);
                     }
+
                     resultados.Add(fila);
                 }
 

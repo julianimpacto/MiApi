@@ -1,10 +1,19 @@
 using Microsoft.EntityFrameworkCore;
 using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
+using System.Text.Json;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddControllers(); // 👈 habilita controladores
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        // 🔹 Forzar serialización simple, sin enums raros
+        options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
+        options.JsonSerializerOptions.DictionaryKeyPolicy = JsonNamingPolicy.CamelCase;
+        options.JsonSerializerOptions.WriteIndented = true;
+    });
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -30,7 +39,6 @@ app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
-// 👇 registra los controladores automáticamente
 app.MapControllers();
 
 app.Run();

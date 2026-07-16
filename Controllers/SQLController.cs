@@ -35,13 +35,13 @@ namespace MiApi.Controllers
                 while (reader.Read())
                 {
                     var fila = new Dictionary<string, object>();
-                    ffor(int i = 0; i < reader.FieldCount; i++)
-{
+                    for (int i = 0; i < reader.FieldCount; i++)
+                    {
+                        // 🔹 Forzar todo a string o null
                         fila[reader.GetName(i)] = reader.IsDBNull(i)
                             ? null
-                            : Convert.ToString(reader.GetValue(i), System.Globalization.CultureInfo.InvariantCulture);
+                            : Convert.ToString(reader.GetValue(i), CultureInfo.InvariantCulture);
                     }
-
                     resultados.Add(fila);
                 }
 
@@ -55,4 +55,27 @@ namespace MiApi.Controllers
 
         // UPDATE
         [HttpPut]
-        public IActionResult Update([FromBody] SqlRequest request
+        public IActionResult Update([FromBody] SqlRequest request) => EjecutarNonQuery(request.Query);
+
+        // DELETE
+        [HttpDelete]
+        public IActionResult Delete([FromBody] SqlRequest request) => EjecutarNonQuery(request.Query);
+
+        // 🔹 Método auxiliar para INSERT/UPDATE/DELETE
+        private IActionResult EjecutarNonQuery(string query)
+        {
+            try
+            {
+                using var conn = new MySqlConnection(_connectionString);
+                conn.Open();
+                using var cmd = new MySqlCommand(query, conn);
+                int filas = cmd.ExecuteNonQuery();
+                return Ok(new { FilasAfectadas = filas });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { Error = ex.Message, StackTrace = ex.StackTrace });
+            }
+        }
+    }
+}
